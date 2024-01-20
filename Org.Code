@@ -1,0 +1,59 @@
+import math
+
+# Display descriptions of each function
+investment_desc = """
+Investment - to calculate the amount of 
+interest you'll earn on your investment
+"""
+bond_desc = """
+Bond - to calculate the amount you'll
+have to pay on a home loan
+"""
+print(investment_desc + bond_desc)
+
+# Process the user's service choice
+serv_choice = input("Enter either 'investment' or 'bond' from the menu above to proceed: ")
+
+if serv_choice.lower() == 'investment':
+    print("You've chosen the Investment service.")
+
+    # User input data for investment calculation
+    deposit = float(input("Amount of money you want to deposit: "))
+    int_rate = float(input("Interest rate %: "))
+    num_years = int(input("Number of years you plan on investing: "))
+    interest = input("Do you want 'simple' or 'compound' interest? ")
+
+    if interest.lower() == 'simple':
+        # Calculation of simple interest
+        total_amnt = deposit * (1 + (int_rate / 100) * num_years)
+        print(f"Total amount after {num_years} years with simple interest: {total_amnt}")
+
+    elif interest.lower() == 'compound':
+        # Calculation of compound interest
+        total_amnt = deposit * math.pow((1 + int_rate / 100), num_years)
+        print(f"Total amount after {num_years} years with compound interest: {total_amnt}")
+
+    else:
+        print("Invalid interest type. Please enter 'simple' or 'compound'.")
+
+elif serv_choice.lower() == 'bond':
+    print("You've chosen the Bond service.")
+
+    # User input data for bond calculation 
+    house_val = float(input("Current value of the house: ")) 
+    int_rate_bond = float(input("Interest rate %: "))
+    num_months = int(input("Number of months to repay the bond: "))
+
+    # Bond calculation code here
+    p = house_val
+    i = (int_rate_bond / 100) / 12  # Monthly interest rate
+    n = num_months  # Number of months
+
+    # Monthly repayment calculation formula
+    monthly_repayment = p * (i * math.pow(1 + i, n)) / (math.pow(1 + i, n) - 1)
+
+    print(f"Monthly repayment for the bond: {monthly_repayment:.2f}")
+
+else:
+    print("Invalid service choice. Please enter 'investment' or 'bond'.")
+
